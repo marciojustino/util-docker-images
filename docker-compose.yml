@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  mssql2017:
+    build:
+      context: .
+      dockerfile: ./mssql/mssql2017.Dockerfile
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=T0tvsDev
+    ports:
+      - 1433:1433
+
+  mssql2019:
+    build:
+      context: .
+      dockerfile: ./mssql/mssql2019.Dockerfile
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=T0tvsDev
+      - MSSQL_SA_PASSWORD=T0tvsDev
+    ports:
+      - 61433:1433
+
+  oracle11xe:
+    build:
+      context: .
+      dockerfile: ./oracle/11.2.0.2-xe/Dockerfile
+    shm_size: 1gb
+    environment:
+      - ORACLE_PWD=T0tvsDev
+      - ORACLE_CHARACTERSET=WE8ISO8859P1
+    ports:
+      - 1521:1521
+
+  oracle11ee:
+    build:
+      context: .
+      dockerfile: ./oracle/11.2.0.1-ee/Dockerfile
+    shm_size: 1gb
+    environment:
+      - ORACLE_PWD=T0tvsDev
+      - ORACLE_CHARACTERSET=WE8ISO8859P1
+    ports:
+      - 1521:1521
+
+  oracle12:
+    build:
+      context: .
+      dockerfile: ./oracle/12.2.0.1-ee/Dockerfile
+    environment:
+      - ORACLE_PWD=T0tvsDev
+      - ORACLE_CHARACTERSET=WE8ISO8859P1
+    ports:
+      - 1522:1521
+
+  oracle19:
+    build:
+      context: .
+      dockerfile: ./oracle/19.3.0.0-ee/Dockerfile
+    environment:
+      - ORACLE_PWD=T0tvsDev
+      - ORACLE_CHARACTERSET=WE8ISO8859P1
+    ports:
+      - 1523:1521
+
+  rabbitmq:
+    build:
+      context: .
+      dockerfile: ./rabbitmq/Dockerfile
+    ports:
+      - 15672:15672
+      - 5672:5672
